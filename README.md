@@ -11,7 +11,7 @@ Modern machine learning systems often rely on Platonic or Aristotelian ontologie
 3. [Installation](#installation)  
 4. [Data](#data)  
 5. [Model Architecture](#model-architecture)  
-6. [Training Objective](#training-objective)  
+6. [Training The FluxNet](#training-fluxnet)  
 7. [Emergent Concepts](#emergent-concepts)  
 8. [Evaluation](#evaluation)  
 9. [Visualization](#visualization)  
@@ -190,7 +190,6 @@ def preprocess_features(df, numeric_cols, categorical_cols, scaler=None, encoder
     X = np.hstack([num_features, context_features])
     return X, scaler, encoder
 ```
-## Concept Membership: Measuring How Well an Embedding Belongs to a Category
 
 The `compute_membership` function calculates the degree to which each embedding in the latent space belongs to a specific category or concept. It does this by first identifying all embeddings with the target label (`type_name`) and computing their **centroid**—the average position in the latent space. Then, it measures the **cosine similarity** between each point in the full embedding set and this centroid. Cosine similarity ranges from -1 to 1, where 1 indicates that a point is perfectly aligned with the concept centroid, 0 indicates no alignment, and -1 indicates opposition. 
 
@@ -205,8 +204,7 @@ def compute_membership(Z, labels, type_name):
     sim = nn.functional.cosine_similarity(Z, centroid.unsqueeze(0))
     return sim.numpy()
 ```
-
-
+## Training the FluxNet
 
 
 
