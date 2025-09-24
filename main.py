@@ -33,18 +33,6 @@ labeled_mask = labels != 'Unlabeled'
 # =========================================
 input_dim = X.shape[1]
 latent_dim = 16
-
-class FluxNet(nn.Module):
-    def __init__(self, input_dim, latent_dim):
-        super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(input_dim, 64),
-            nn.ReLU(),
-            nn.Linear(64, latent_dim)
-        )
-    def forward(self, x):
-        return self.net(x)
-
 model = FluxNet(input_dim, latent_dim)
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
