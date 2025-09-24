@@ -14,8 +14,8 @@ Modern machine learning systems often rely on Platonic or Aristotelian ontologie
 6. [Training The FluxNet](#training-fluxnet)  
 7. [Emergent Concepts](#emergent-concepts)  
 8. [Evaluation](#evaluation)  
-9. [Visualization](#visualization)  
-10. [Limitations and Future Work](#limitations-and-future-work)  
+9. [Visualisation](#visualization)  
+10. [Outlook](#outlook)  
 11. [References](#references)  
 
 ## Background
@@ -295,8 +295,13 @@ for epoch in range(epochs):
         print(f"Epoch {epoch}: Loss = {avg_loss:.6f}")
 ```
 
+## Emergent Concepts
 
+## Evaluation
 
+## Visualisation
+
+## Outlook
 
 ## References 
 [1] Huh, M., Cheung, B., Wang, T. & Isola, P., 2024. *The Platonic Representation Hypothesis*. arXiv preprint arXiv:2405.07987.
