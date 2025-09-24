@@ -197,12 +197,32 @@ Intuitively, this allows us to see which points in the latent space “fit” a 
 
 ```python
 def compute_membership(Z, labels, type_name):
+    """
+   Compute the membership similarity of each embedding to a specific concept.
+
+   This function calculates how closely each point in the latent space Z aligns
+   with the centroid of a given category (type_name). The centroid is the mean
+   embedding of all points belonging to that category. Similarity is measured
+   using cosine similarity, yielding a score between -1 (opposite) and 1 (identical).
+
+   Args:
+       Z (torch.Tensor): Latent embeddings for all examples, shape (num_samples, latent_dim).
+       labels (array-like): Array of category labels corresponding to each embedding in Z.
+       type_name (str): The category for which membership similarity is computed.
+
+   Returns:
+       np.ndarray or None:
+           - Array of cosine similarity scores for each embedding relative to the centroid.
+           - Returns None if no examples of the specified type are found.
+   """
+    # Compute cosine similarity of each point to the centroid of a given type
     idx = [i for i, l in enumerate(labels) if l == type_name]
     if not idx:
         return None
     centroid = Z[idx].mean(dim=0)
     sim = nn.functional.cosine_similarity(Z, centroid.unsqueeze(0))
     return sim.numpy()
+
 ```
 ## Training the FluxNet
 
