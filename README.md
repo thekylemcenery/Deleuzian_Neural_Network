@@ -4,6 +4,19 @@
 Modern machine learning systems often rely on Platonic or Aristotelian ontologies, treating concepts as fixed forms or sets of attributes. While effective for traditional classification, such frameworks struggle with nuance, ambiguity, and emergent structures, often encoding human biases and failing to capture the complexity of reality. In contrast, postmodern philosophies—particularly those of Nietzsche and Deleuze, emphasize concepts as dynamic, relational, and defined by their differential interactions rather than fixed identities. This project implements a computational analogue of this ontology, modelling concepts as latent vector fields shaped by differences, enabling more flexible, nuanced, and emergent representations of categories and taxonomy.
 
 ## Contents 
+## Contents  
+
+1. [Introduction](#introduction)  
+2. [Background](#background)  
+3. [Installation](#installation)  
+4. [Data](#data)  
+5. [Model Architecture](#model-architecture)  
+6. [Training Objective](#training-objective)  
+7. [Emergent Concepts](#emergent-concepts)  
+8. [Evaluation](#evaluation)  
+9. [Visualization](#visualization)  
+10. [Limitations and Future Work](#limitations-and-future-work)  
+11. [References](#references)  
 
 ## Background
 
@@ -23,8 +36,6 @@ This motivates Nietzsche and Deleuze’s focus on **pure difference**, where ide
 
 ## Data
 
-## Data  
-
 The project uses two tab-separated datasets:  
 
 - **`animals_100.tsv`**: the main training dataset, containing around 100 animals.  
@@ -39,7 +50,7 @@ Each animal is described through two kinds of features:
 Labels (e.g. *Cat*, *Dog*, *Bird*, *Aquatic Mammal*) are provided for some animals but not all. This partial labeling is intentional: the network is not meant to learn fixed categories in the Aristotelian sense, but to generate **emergent clusters** in latent space.  
 
 In other words, the data provides the **raw differences**—quantitative and qualitative traits—while the model organizes these differences into dynamic concepts, without presupposing fixed essences.  
-
+ 
 
 
 ## References 
