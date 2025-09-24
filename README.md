@@ -72,7 +72,36 @@ class FluxNet(nn.Module):
         return self.net(x)
 ```
 
+Contrastive loss trains the network to organize embeddings based on relational similarity, reflecting the idea that identity emerges from difference. For each pair of embeddings `z1` and `z2`, we compute their cosine similarity (`cos_sim`), which ranges from -1 (opposite) to 1 (identical). Positive pairs (`label=1`) are encouraged to be close in latent space using a loss of `1 - cos_sim`, while negative pairs (`label=0`) are pushed apart only if their similarity exceeds a margin (`torch.clamp(cos_sim - margin, min=0)`). The mean of these positive and negative losses is taken over all pairs to train the network. Intuitively, cats cluster near other cats, and cats are pushed away from birds or dogs. This allows the latent space to emerge as a Deleuzian flux, where concepts form dynamically according to differences rather than fixed definitions.
 
+```python
+def contrastive_loss(z1, z2, label, margin=1.0):
+    """
+    Compute the contrastive loss between two embeddings. 
+    This loss encourages embeddings of similar items to be close
+    and embeddings of dissimilar items to be separated by at least `margin`.
+
+    Args:
+        z1 (torch.Tensor): Latent embedding of the first sample, shape (1, latent_dim) or (batch_size, latent_dim).
+        z2 (torch.Tensor): Latent embedding of the second sample, same shape as z1.
+        label (torch.Tensor): Binary label indicating similarity:
+                              1 if the pair is similar (same class), 
+                              0 if the pair is dissimilar (different class).
+        margin (float, optional): Minimum distance negative pairs should maintain.
+                                  Defaults to 1.0.
+
+    Returns:
+        torch.Tensor: Scalar tensor representing the mean contrastive loss over the pair(s).
+    """
+    # Compute cosine similarity between two embeddings
+    cos_sim = nn.functional.cosine_similarity(z1, z2)
+    # If same label: minimize (1 - similarity)
+    pos_loss = (1 - cos_sim) * label
+    # If different label: penalize similarity beyond margin
+    neg_loss = torch.clamp(cos_sim - margin, min=0) * (1 - label)
+    # Average the combined loss
+    return (pos_loss + neg_loss).mean()
+```
  
 
 
