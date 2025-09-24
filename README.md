@@ -34,6 +34,8 @@ A key limitation of this framework is that identity is still defined in relation
 
 This motivates Nietzsche and Deleuze’s focus on **pure difference**, where identity emerges from difference itself rather than through comparison or negation. Concepts are not defined by fixed qualities or opposition to other categories; they are dynamic patterns of relations and variations. A concept is always in motion, shaped by differences from other phenomena, allowing new identities to emerge organically. For example, a hybrid plant with characteristics of both a tree and a cactus exists as its own concept, without being forced into pre-existing categories, capturing novelty and fluidity naturally [3].
 
+## Installation
+
 ## Data
 
 The project uses two tab-separated datasets:  
@@ -267,6 +269,34 @@ Contrastive learning requires pairs of examples with a label indicating whether 
 # Create training pairs (same-label = positive, diff-label = negative)
 pairs, pair_labels = generate_pairs_with_labels(X_tensor, labels)
 ```
+
+The following section trains the FluxNet model using **contrastive learning**, where the network learns a latent space that encodes conceptual similarity and difference. Each pair of examples is used to teach the model which samples should be close together (same category) and which should be farther apart (different categories). Over multiple epochs, the network gradually adjusts its weights to form a meaningful **latent flux space** in which emergent concepts are geometrically represented.
+
+```python
+epochs = 100
+margin = 1.0   # contrastive loss margin
+
+for epoch in range(epochs):
+    model.train()
+    total_loss = 0.0
+    for (z1, z2), label_val in zip(pairs, pair_labels):
+        optimizer.zero_grad()
+        # encode both items into latent space
+        z1_latent = model(z1.unsqueeze(0))
+        z2_latent = model(z2.unsqueeze(0))
+        # compute contrastive loss
+        loss = contrastive_loss(z1_latent, z2_latent, label_val.unsqueeze(0), margin)
+        loss.backward()
+        optimizer.step()
+        total_loss += loss.item()
+    # print average loss every 10 epochs
+    if epoch % 10 == 0:
+        avg_loss = total_loss / max(1, len(pairs))
+        print(f"Epoch {epoch}: Loss = {avg_loss:.6f}")
+```
+
+
+
 
 ## References 
 [1] Huh, M., Cheung, B., Wang, T. & Isola, P., 2024. *The Platonic Representation Hypothesis*. arXiv preprint arXiv:2405.07987.
