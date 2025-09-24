@@ -190,6 +190,25 @@ def preprocess_features(df, numeric_cols, categorical_cols, scaler=None, encoder
     X = np.hstack([num_features, context_features])
     return X, scaler, encoder
 ```
+## Concept Membership: Measuring How Well an Embedding Belongs to a Category
+
+The `compute_membership` function calculates the degree to which each embedding in the latent space belongs to a specific category or concept. It does this by first identifying all embeddings with the target label (`type_name`) and computing their **centroid**—the average position in the latent space. Then, it measures the **cosine similarity** between each point in the full embedding set and this centroid. Cosine similarity ranges from -1 to 1, where 1 indicates that a point is perfectly aligned with the concept centroid, 0 indicates no alignment, and -1 indicates opposition. 
+
+Intuitively, this allows us to see which points in the latent space “fit” a concept, even for ambiguous or partially labeled data. For example, if we compute membership for the concept *Cat*, embeddings representing black cats, white cats, and other feline variations will have higher similarity scores, while embeddings for dogs or birds will have lower scores. This forms the basis of the **concept vector field**, which visualizes categories dynamically according to the differences between instances, reflecting a Deleuzian notion of flux and emergent identity.
+
+```python
+def compute_membership(Z, labels, type_name):
+    idx = [i for i, l in enumerate(labels) if l == type_name]
+    if not idx:
+        return None
+    centroid = Z[idx].mean(dim=0)
+    sim = nn.functional.cosine_similarity(Z, centroid.unsqueeze(0))
+    return sim.numpy()
+```
+
+
+
+
 
 ## References 
 [1] Huh, M., Cheung, B., Wang, T. & Isola, P., 2024. *The Platonic Representation Hypothesis*. arXiv preprint arXiv:2405.07987.
