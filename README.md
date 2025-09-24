@@ -102,7 +102,38 @@ def contrastive_loss(z1, z2, label, margin=1.0):
     # Average the combined loss
     return (pos_loss + neg_loss).mean()
 ```
- 
+
+The `generate_pairs_with_labels` function prepares the input for contrastive loss by creating all unique pairs of examples from the dataset. For each pair, it assigns a label: `1` if both examples belong to the same category (positive pair) and `0` if they belong to different categories (negative pair). The function iterates through every combination of examples, skipping any unlabeled entries, and returns two lists: `pair_list`, containing the pairs of feature vectors, and `label_list`, containing the corresponding 0/1 labels as a tensor. This ensures that the network receives both similar and dissimilar examples to learn a latent space where embeddings reflect conceptual differences and similarities dynamically.
+
+```python
+def generate_pairs_with_labels(X_tensor, labels):
+    """
+    Generate all unique pairs of examples and assign similarity labels for contrastive learning.
+
+    This function creates training pairs for the network. Each pair is labeled 
+    according to whether the two examples belong to the same category (1) or 
+    different categories (0). Unlabeled entries are skipped.
+
+    Args:
+        X_tensor (torch.Tensor): Tensor of input feature vectors, shape (num_samples, num_features).
+        labels (array-like): Array of category labels for each sample. Empty strings indicate unlabeled examples.
+
+    Returns:
+        tuple:
+            - pair_list (list of tuple): List of pairs of feature vectors (z1, z2).
+            - label_list (torch.Tensor): Tensor of binary labels for each pair (1=same class, 0=different class).
+    """
+    # Generate all unique pairs of examples and assign label:
+    # 1 if same category, 0 if different
+    pair_list, label_list = [], []
+    n = len(labels)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if labels[i] != '' and labels[j] != '':
+                pair_list.append((X_tensor[i], X_tensor[j]))
+                label_list.append(1 if labels[i] == labels[j] else 0)
+    return pair_list, torch.tensor(label_list, dtype=torch.float32)
+```
 
 
 ## References 
