@@ -49,7 +49,7 @@ Each animal is described through two kinds of features:
 
 Labels (e.g. *Cat*, *Dog*, *Bird*, *Aquatic Mammal*) are provided for some animals but not all. This partial labeling is intentional: the network is not meant to learn fixed categories in the Aristotelian sense, but to generate **emergent clusters** in latent space.  
 
-In other words, the data provides the **raw differences**—quantitative and qualitative traits—while the model organizes these differences into dynamic concepts, without presupposing fixed essences.  
+In other words, the data provides the **raw differences** (quantitative and qualitative traits), while the model organizes these differences into dynamic concepts, without presupposing fixed essences.  
  
 
 
