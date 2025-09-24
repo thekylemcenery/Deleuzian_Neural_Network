@@ -35,6 +35,21 @@ A key limitation of this framework is that identity is still defined in relation
 This motivates Nietzsche and Deleuze’s focus on **pure difference**, where identity emerges from difference itself rather than through comparison or negation. Concepts are not defined by fixed qualities or opposition to other categories; they are dynamic patterns of relations and variations. A concept is always in motion, shaped by differences from other phenomena, allowing new identities to emerge organically. For example, a hybrid plant with characteristics of both a tree and a cactus exists as its own concept, without being forced into pre-existing categories, capturing novelty and fluidity naturally [3].
 
 ## Installation
+## Installation
+
+To run this project, you need Python 3.8+ and the following libraries. You can install them using `pip`.
+
+```bash
+# Core libraries
+pip install numpy pandas matplotlib
+
+# PyTorch (replace with your CUDA version if needed)
+pip install torch torchvision torchaudio
+
+# Scikit-learn for preprocessing, PCA, and kNN
+pip install scikit-learn
+```
+
 
 ## Data
 
