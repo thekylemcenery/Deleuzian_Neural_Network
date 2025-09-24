@@ -93,23 +93,6 @@ Contrastive loss trains the network to organize embeddings based on relational s
 
 ```python
 def contrastive_loss(z1, z2, label, margin=1.0):
-    """
-    Compute the contrastive loss between two embeddings. 
-    This loss encourages embeddings of similar items to be close
-    and embeddings of dissimilar items to be separated by at least `margin`.
-
-    Args:
-        z1 (torch.Tensor): Latent embedding of the first sample, shape (1, latent_dim) or (batch_size, latent_dim).
-        z2 (torch.Tensor): Latent embedding of the second sample, same shape as z1.
-        label (torch.Tensor): Binary label indicating similarity:
-                              1 if the pair is similar (same class), 
-                              0 if the pair is dissimilar (different class).
-        margin (float, optional): Minimum distance negative pairs should maintain.
-                                  Defaults to 1.0.
-
-    Returns:
-        torch.Tensor: Scalar tensor representing the mean contrastive loss over the pair(s).
-    """
     # Compute cosine similarity between two embeddings
     cos_sim = nn.functional.cosine_similarity(z1, z2)
     # If same label: minimize (1 - similarity)
@@ -124,22 +107,6 @@ The `generate_pairs_with_labels` function prepares the input for contrastive los
 
 ```python
 def generate_pairs_with_labels(X_tensor, labels):
-    """
-    Generate all unique pairs of examples and assign similarity labels for contrastive learning.
-
-    This function creates training pairs for the network. Each pair is labeled 
-    according to whether the two examples belong to the same category (1) or 
-    different categories (0). Unlabeled entries are skipped.
-
-    Args:
-        X_tensor (torch.Tensor): Tensor of input feature vectors, shape (num_samples, num_features).
-        labels (array-like): Array of category labels for each sample. Empty strings indicate unlabeled examples.
-
-    Returns:
-        tuple:
-            - pair_list (list of tuple): List of pairs of feature vectors (z1, z2).
-            - label_list (torch.Tensor): Tensor of binary labels for each pair (1=same class, 0=different class).
-    """
     # Generate all unique pairs of examples and assign label:
     # 1 if same category, 0 if different
     pair_list, label_list = [], []
@@ -170,22 +137,6 @@ The function returns the feature matrix `X` along with the fitted `scaler` and `
 
 ```python
 def preprocess_features(df, numeric_cols, categorical_cols, scaler=None, encoder=None):
-    """
-    Preprocess numeric and categorical features for neural network input.
-
-    Args:
-        df (pandas.DataFrame): Raw input data containing both numeric and categorical columns.
-        numeric_cols (list of str): Names of numeric columns to standardize.
-        categorical_cols (list of str): Names of categorical columns to one-hot encode.
-        scaler (sklearn.preprocessing.StandardScaler, optional): Fitted scaler to reuse. If None, a new one is fitted.
-        encoder (sklearn.preprocessing.OneHotEncoder, optional): Fitted encoder to reuse. If None, a new one is fitted.
-
-    Returns:
-        tuple:
-            - X (np.ndarray): Preprocessed feature matrix (numeric + one-hot categorical features).
-            - scaler (StandardScaler): Fitted scaler used for numeric columns.
-            - encoder (OneHotEncoder): Fitted encoder used for categorical columns.
-    """
     # --- Numeric preprocessing ---
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors='coerce')   
@@ -214,24 +165,6 @@ Intuitively, this allows us to see which points in the latent space “fit” a 
 
 ```python
 def compute_membership(Z, labels, type_name):
-    """
-   Compute the membership similarity of each embedding to a specific concept.
-
-   This function calculates how closely each point in the latent space Z aligns
-   with the centroid of a given category (type_name). The centroid is the mean
-   embedding of all points belonging to that category. Similarity is measured
-   using cosine similarity, yielding a score between -1 (opposite) and 1 (identical).
-
-   Args:
-       Z (torch.Tensor): Latent embeddings for all examples, shape (num_samples, latent_dim).
-       labels (array-like): Array of category labels corresponding to each embedding in Z.
-       type_name (str): The category for which membership similarity is computed.
-
-   Returns:
-       np.ndarray or None:
-           - Array of cosine similarity scores for each embedding relative to the centroid.
-           - Returns None if no examples of the specified type are found.
-   """
     # Compute cosine similarity of each point to the centroid of a given type
     idx = [i for i, l in enumerate(labels) if l == type_name]
     if not idx:
