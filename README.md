@@ -296,7 +296,21 @@ for epoch in range(epochs):
 ```
 
 ## Emergent Concepts
+After training, the network is used to compute **latent embeddings** for all training examples. Setting `model.eval()` and wrapping the computation in `torch.no_grad()` ensures that the network runs in inference mode without tracking gradients.  
 
+```python
+model.eval()
+with torch.no_grad():
+    Z = model(X_tensor)  # latent embeddings of training data
+
+# Compute centroids (concept centers) for each known type
+type_names = ['Cat','Dog','Bird','Aquatic Mammal']
+centroids = {}
+for t in type_names:
+    idx = [i for i,l in enumerate(labels) if l==t]
+    if idx:
+        centroids[t] = Z[idx].mean(dim=0)
+```
 ## Evaluation
 
 ## Visualisation
