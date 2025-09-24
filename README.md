@@ -365,3 +365,5 @@ Thanks to [Vrushal](https://github.com/Vrushall) for contributions and feedback 
 [2] Lastrevio, 2024. *Quantum Field Theory and Hegel’s Mistakes: How Process Philosophy Helps Solve the Paradoxes of Modern Physics*. Available at: https://lastreviotheory.medium.com/quantum-field-theory-and-hegels-mistakes-how-process-philosophy-helps-solve-the-paradoxes-of-87322def8aa6 [Accessed 24 Sep. 2025].
 
 [3] Deleuze, G., 1983. *Nietzsche and Philosophy*. New York: Columbia University Press.
+
+[4] Deleuze, G. (1968). Difference and Repetition. Paris: Presses Universitaires de France.
