@@ -226,7 +226,34 @@ def compute_membership(Z, labels, type_name):
 ```
 ## Training the FluxNet
 
+The first step is to load both the training and test datasets. In this project, the training data (`animals_100.tsv`) contains animal features along with their category labels, while the test data (`animals_test.tsv`) contains the same features but may be partially or completely unlabeled.  
 
+Features are split into two types:
+
+- **Numeric features**: measurable quantities such as `'Fur'`, `'Legs'`, `'Wings'`, `'Tail'`, and `'Weight'`.  
+- **Categorical features**: descriptive properties such as `'Color'`, `'Habitat'`, and `'Diet'`.
+
+This separation is important because numeric and categorical features require different preprocessing steps for input into a neural network.
+
+```python
+df = pd.read_csv("animals_100.tsv", sep="\t")     # training dataset
+test_df = pd.read_csv("animals_test.tsv", sep="\t")  # test dataset
+numeric_cols = ['Fur', 'Legs', 'Wings', 'Tail', 'Weight']   # numeric features
+categorical_cols = ['Color', 'Habitat', 'Diet']             # categorical features
+```
+
+### 2. Preprocess Features
+
+Once the raw data is loaded, the features must be prepared for input into the neural network. This section performs **numeric standardization**, **categorical one-hot encoding**, and converts the data into a PyTorch tensor.
+
+```python
+# Standardize numeric features + one-hot encode categorical features
+X, scaler, encoder = preprocess_features(df, numeric_cols, categorical_cols)
+X_tensor = torch.tensor(X, dtype=torch.float32)
+labels = df['Type_Label'].fillna('Unlabeled').values   # labels (use "Unlabeled" if missing)
+labeled_mask = labels != 'Unlabeled'                  # boolean mask: labeled vs unlabeled
+
+```
 
 ## References 
 [1] Huh, M., Cheung, B., Wang, T. & Isola, P., 2024. *The Platonic Representation Hypothesis*. arXiv preprint arXiv:2405.07987.
