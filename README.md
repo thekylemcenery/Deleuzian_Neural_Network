@@ -50,6 +50,29 @@ Each animal is described through two kinds of features:
 Labels (e.g. *Cat*, *Dog*, *Bird*, *Aquatic Mammal*) are provided for some animals but not all. This partial labeling is intentional: the network is not meant to learn fixed categories in the Aristotelian sense, but to generate **emergent clusters** in latent space.  
 
 In other words, the data provides the **raw differences** (quantitative and qualitative traits), while the model organizes these differences into dynamic concepts, without presupposing fixed essences.  
+
+
+## Model Architecture  
+
+At the heart of this project is **FluxNet**, a simple feedforward neural network that compresses raw input features into a lower-dimensional *latent flux space*. Unlike classical models that fix categories in advance, this network learns relational embeddings that allow categories to emerge dynamically.
+
+```python
+class FluxNet(nn.Module):
+    def __init__(self, input_dim, latent_dim=16):
+        super().__init__()
+        # Simple feedforward network: input → hidden layer → latent embedding
+        self.net = nn.Sequential(
+            nn.Linear(input_dim, 64),  # project input features to 64 dims
+            nn.ReLU(),                 # non-linear activation
+            nn.Linear(64, latent_dim)  # project to latent flux space
+        )
+
+    def forward(self, x):
+        # Forward pass: map input features into latent space
+        return self.net(x)
+```
+
+
  
 
 
