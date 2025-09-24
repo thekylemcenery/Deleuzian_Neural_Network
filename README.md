@@ -33,7 +33,19 @@ Hegel addresses change through **dialectical or relational difference**, where a
 
 A key limitation of this framework is that identity is still defined in relation to something else. For example, a hybrid plant with traits of both a tree and a cactus challenges classification, because identity depends on pre-existing categories. This reflects a deeper limitation of logic: essences, negation, and fixed categories do not exist in natur, they are human constructs. Taxonomy is a tool for communication, not a mirror of reality. Quantum field theory illustrates this: particles appear stable but are fundamentally unstable distortions of underlying fields. A particle delineates itself from a field without the field delineating itself from the particle; in reality, there are no fixed things, only events [2].
 
-This motivates Nietzsche and Deleuze’s focus on **pure difference**, where identity emerges from difference itself rather than through comparison or negation. Concepts are not defined by fixed qualities or opposition to other categories; they are dynamic patterns of relations and variations. A concept is always in motion, shaped by differences from other phenomena, allowing new identities to emerge organically. For example, a hybrid plant with characteristics of both a tree and a cactus exists as its own concept, without being forced into pre-existing categories, capturing novelty and fluidity naturally [3].
+This motivates Nietzsche and Deleuze’s focus on **pure difference**, where identity emerges from difference itself rather than through comparison or negation. Concepts are not defined by fixed qualities or opposition to other categories; they are dynamic patterns of relations and variations. A concept is always in motion, shaped by differences from other phenomena, allowing new identities to emerge organically. For example, a hybrid plant with characteristics of both a tree and a cactus exists as its own concept, without being forced into pre-existing categories, capturing novelty and fluidity naturally [3]. 
+
+Deleuze fully realised this notion of "difference in itself", where difference is metaphysically and ontologically prior to identity in his 1968 work "Difference and Repetition".[4] He later dubbed this ontology as ‘transcendental empiricism’ in contrast to Kant's notion of 'transcendental idealism. This project is a first attempt to explore these ideas mathematically, following Deleuze’s analogy with Leibniz, difefrnce is best understood via dx, the differential. The derivative, dy/dx, determines the structure of a curve while existing outside the curve itself; that is, by describing a virtual tangent. Analogously, if a concept's **comprehension** can be understood in terms of its features, these features can be represented as **variables**. However, for the **entire extension** of the concept to be captured in its general definition, the definition itself must be **dynamic with respect to context**.  
+
+Thus, we define a concept as a **dynamic vector field**:
+
+\[
+\mathbf{C}(\mathbf{x}, t) : \mathbb{R}^n \times \mathbb{R} \to \mathbb{R}^n
+\]
+
+where \(\mathbf{x}\) represents the feature vectors of examples within the concept's extension, and \(t\) represents the contextual parameters. Relevant derivatives, such as \(\frac{\partial \mathbf{C}}{\partial t}\) or \(\nabla_{\mathbf{x}} \mathbf{C}\), encode the **variation of the concept** with context or feature space.  
+
+This formalism allows **all examples within the extension** (represented by vectors) to be **understood within the definition**, without imposing the **closed boundaries** associated with traditional essentialism.
 
 ## Installation
 
