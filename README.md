@@ -350,6 +350,12 @@ This resulting visualization shows how the latent embeddings organize into conce
 
 The model’s predictions showed mixed success, which is unsurprising given the exploratory nature of this project. The primary goal was not to optimize classification accuracy, but rather to investigate how Deleuze’s ontology could be represented mathematically in a neural network. A full-scale implementation with robust error minimization would be needed to improve predictive performance, but that was beyond the scope of this study. Think of this work as a conceptual exploration of a novel approach to **information ontology**. For future development, one could design a more focused neural network that learns a single concept at a time using a semi-supervised dataset from a single perceptual category. This would allow the model to produce a **single, coherent vector field** representing that concept, offering a cleaner, more interpretable latent space and a more faithful implementation of Deleuzian flux.
 
+
+## Acknowledgments
+
+Thanks to [Vrushal](https://github.com/Vrushall) for contributions and feedback on this project.
+
+
 ## References 
 [1] Huh, M., Cheung, B., Wang, T. & Isola, P., 2024. *The Platonic Representation Hypothesis*. arXiv preprint arXiv:2405.07987.
 
