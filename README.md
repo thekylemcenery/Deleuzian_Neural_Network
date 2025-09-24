@@ -38,10 +38,11 @@ This motivates Nietzsche and Deleuze’s focus on **pure difference**, where ide
 Deleuze fully realised this notion of "difference in itself", where difference is metaphysically and ontologically prior to identity in his 1968 work "Difference and Repetition".[4] He later dubbed this ontology as ‘transcendental empiricism’ in contrast to Kant's notion of 'transcendental idealism. This project is a first attempt to explore these ideas mathematically, following Deleuze’s analogy with Leibniz, difefrnce is best understood via dx, the differential. The derivative, dy/dx, determines the structure of a curve while existing outside the curve itself; that is, by describing a virtual tangent. Analogously, if a concept's **comprehension** can be understood in terms of its features, these features can be represented as **variables**. However, for the **entire extension** of the concept to be captured in its general definition, the definition itself must be **dynamic with respect to context**.  
 
 Thus, we define a concept as a **dynamic vector field**:
+
 $$
-\[
-\mathbf{C}(\mathbf{x}, t) : \mathbb{R}^n \times \mathbb{R} \to \mathbb{R}^n
-\]
+\mathbf{v}(\mathbf{x}, t) = \frac{d\mathbf{x}}{dt}, \quad 
+\frac{\partial \mathbf{v}}{\partial \mathbf{x}}, \quad 
+\frac{\partial \mathbf{v}}{\partial t}
 $$
 where \(\mathbf{x}\) represents the feature vectors of examples within the concept's extension, and \(t\) represents the contextual parameters. Relevant derivatives, such as \(\frac{\partial \mathbf{C}}{\partial t}\) or \(\nabla_{\mathbf{x}} \mathbf{C}\), encode the **variation of the concept** with context or feature space.  
 
