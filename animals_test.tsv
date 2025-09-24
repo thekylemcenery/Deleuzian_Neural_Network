@@ -1,0 +1,21 @@
+Animal	Fur	Legs	Wings	Tail	Weight	Color	Habitat	Diet	Type_Label
+101	1	4	0	1	4.2	White	Domestic	Carnivore	
+102	1	4	0	1	3.9	Brown	Domestic	Carnivore	
+103	0	4	0	1	4.0	Grey	Domestic	Carnivore	
+104	0	2	1	1	16	BlackWhite	Antarctic	Piscivore	
+105	0	2	1	1	2	Green	Tropical	Nectarivore	
+106	1	4	0	1	22	Tan	Domestic	Omnivore	
+107	1	4	0	1	21	Brown	Domestic	Omnivore	
+108	0	0	0	1	155	Grey	Ocean	Piscivore	
+109	0	0	0	1	160	Blue	Ocean	Piscivore	
+110	0	2	1	1	1.8	Yellow	Farm	Omnivore	
+111	0	2	1	1	2.1	BlackWhite	Tropical	Omnivore	
+112	1	4	0	1	3.7	Black	Domestic	Carnivore	
+113	0	2	1	1	2	White	Farm	Omnivore	
+114	0	2	0	1	90	Brown	Savannah	Omnivore	
+115	0	2	1	1	6	Brown	Mountain	Carnivore	
+116	1	4	0	1	4.5	Orange	Domestic	Carnivore	
+117	1	4	0	1	20	Brown	Domestic	Omnivore	
+118	1	4	0	1	21	Tan	Domestic	Omnivore	
+119	0	2	1	1	1.9	BlackWhite	Tropical	Omnivore	
+120	0	2	1	1	2.5	Yellow	Farm	Omnivore	

@@ -1,0 +1,101 @@
+Animal	Fur	Legs	Wings	Tail	Weight	Color	Habitat	Diet	Type_Label
+1	1	4	0	1	4.5	Brown	Domestic	Carnivore	Cat
+2	1	4	0	1	3.8	White	Domestic	Carnivore	
+3	0	4	0	1	4	Pink	Domestic	Carnivore	
+4	1	4	0	1	4.6	Orange	Domestic	Carnivore	
+5	1	4	0	1	4.2	Grey	Domestic	Carnivore	
+6	1	4	0	1	4.1	Black	Domestic	Carnivore	Cat
+7	0	2	1	1	15	BlackWhite	Antarctic	Piscivore	Bird
+8	0	2	0	1	90	Brown	Savannah	Omnivore	
+9	0	2	1	1	1.5	Green	Tropical	Omnivore	
+10	1	4	0	1	22	Tan	Domestic	Omnivore	Dog
+11	1	4	0	1	20	Brown	Domestic	Omnivore	
+12	1	4	0	1	21	Black	Domestic	Omnivore	
+13	0	0	0	1	150	Grey	Ocean	Piscivore	Aquatic Mammal
+14	0	0	0	1	160	Grey	Ocean	Piscivore	
+15	0	0	0	1	155	Blue	Ocean	Piscivore	
+16	0	0	0	1	140	Grey	Ocean	Piscivore	
+17	0	2	1	1	2.2	Blue	Domestic	Omnivore	
+18	0	2	1	1	2	White	Farm	Omnivore	
+19	0	2	1	1	1	Brown	Forest	Omnivore	
+20	0	2	0	1	3	Brown	Forest	Omnivore	
+21	0	2	0	1	2.5	Yellow	Farm	Omnivore	
+22	0	2	1	1	2	BlackWhite	Tropical	Omnivore	Bird
+23	1	4	0	1	3.9	Brown	Domestic	Carnivore	
+24	1	4	0	1	3.8	White	Domestic	Carnivore	
+25	1	4	0	1	4.7	Black	Domestic	Carnivore	Cat
+26	1	4	0	1	5	Black	Domestic	Carnivore	
+27	1	4	0	1	4.3	Grey	Domestic	Carnivore	
+28	1	4	0	1	17	Brown	Domestic	Omnivore	Dog
+29	1	4	0	1	18	Brown	Domestic	Omnivore	
+30	1	4	0	1	19	Tan	Domestic	Omnivore	
+31	1	4	0	1	23	White	Domestic	Omnivore	
+32	0	0	0	1	30000	BlueGrey	Ocean	Piscivore	
+33	0	0	0	1	31000	Grey	Ocean	Piscivore	Aquatic Mammal
+34	0	2	1	1	1.8	Red	Tropical	Omnivore	
+35	0	2	1	1	1	GreenRed	Tropical	Nectarivore	
+36	0	2	1	1	2.5	Yellow	Farm	Omnivore	
+37	0	2	0	1	90	Brown	Savannah	Omnivore	
+38	0	2	1	1	6	Brown	Mountain	Carnivore	
+39	0	2	1	1	2	White	Farm	Omnivore	
+40	0	2	1	1	2.2	BlackWhite	Tropical	Omnivore	
+41	1	4	0	1	5	Grey	Domestic	Carnivore	Cat
+42	0	2	1	1	2	BlackWhite	Tropical	Omnivore	
+43	1	4	0	1	4.8	Brown	Domestic	Carnivore	
+44	0	2	0	1	1.2	White	Tropical	Omnivore	Bird
+45	1	4	0	1	3.5	Grey	Domestic	Carnivore	
+46	1	4	0	1	4.2	Orange	Domestic	Carnivore	
+47	0	4	0	1	3.7	Pink	Domestic	Carnivore	
+48	0	0	0	1	160	Grey	Ocean	Piscivore	Aquatic Mammal
+49	0	0	0	1	155	Blue	Ocean	Piscivore	
+50	0	0	0	1	170	Grey	Ocean	Piscivore	
+51	1	4	0	1	22	Brown	Domestic	Omnivore	Dog
+52	1	4	0	1	21	Tan	Domestic	Omnivore	
+53	1	4	0	1	20	Black	Domestic	Omnivore	
+54	0	2	1	1	1.8	White	Tropical	Omnivore	
+55	0	2	1	1	2.2	Green	Tropical	Nectarivore	
+56	0	2	1	1	2.5	Yellow	Farm	Omnivore	
+57	0	2	0	1	90	Brown	Savannah	Omnivore	
+58	0	2	1	1	6	Brown	Mountain	Carnivore	
+59	0	2	1	1	2.1	White	Farm	Omnivore	
+60	1	4	0	1	3.8	Grey	Domestic	Carnivore	Cat
+61	0	2	1	1	2	BlackWhite	Tropical	Omnivore	
+62	1	4	0	1	4.1	Brown	Domestic	Carnivore	
+63	0	2	0	1	1.5	White	Tropical	Omnivore	Bird
+64	0	2	1	1	1.9	Green	Tropical	Nectarivore	
+65	0	2	1	1	2.3	Yellow	Farm	Omnivore	
+66	1	4	0	1	4.5	Orange	Domestic	Carnivore	
+67	1	4	0	1	4.7	Grey	Domestic	Carnivore	
+68	0	0	0	1	150	BlueGrey	Ocean	Piscivore	Aquatic Mammal
+69	0	0	0	1	160	Grey	Ocean	Piscivore	
+70	1	4	0	1	20	Brown	Domestic	Omnivore	Dog
+71	1	4	0	1	21	Tan	Domestic	Omnivore	
+72	1	4	0	1	22	Black	Domestic	Omnivore	
+73	0	2	1	1	2.1	White	Tropical	Omnivore	
+74	0	2	1	1	2	Green	Tropical	Nectarivore	
+75	0	2	1	1	2.4	Yellow	Farm	Omnivore	
+76	0	2	0	1	95	Brown	Savannah	Omnivore	
+77	0	2	1	1	6	Brown	Mountain	Carnivore	
+78	0	2	1	1	2.1	White	Farm	Omnivore	
+79	0	2	1	1	1.9	BlackWhite	Tropical	Omnivore	
+80	1	4	0	1	4.3	Brown	Domestic	Carnivore	
+81	1	4	0	1	3.9	White	Domestic	Carnivore	
+82	1	4	0	1	4.6	Black	Domestic	Carnivore	
+83	1	4	0	1	4.2	Grey	Domestic	Carnivore	
+84	0	2	0	1	1.3	White	Tropical	Omnivore	Bird
+85	0	2	1	1	1.8	BlackWhite	Tropical	Omnivore	
+86	0	0	0	1	155	Grey	Ocean	Piscivore	Aquatic Mammal
+87	0	0	0	1	160	Blue	Ocean	Piscivore	
+88	1	4	0	1	23	Brown	Domestic	Omnivore	Dog
+89	1	4	0	1	22	Tan	Domestic	Omnivore	
+90	1	4	0	1	21	Black	Domestic	Omnivore	
+91	0	2	1	1	2.2	White	Tropical	Omnivore	
+92	0	2	1	1	2	Green	Tropical	Nectarivore	
+93	0	2	1	1	2.5	Yellow	Farm	Omnivore	
+94	0	2	0	1	90	Brown	Savannah	Omnivore	
+95	0	2	1	1	1.7	Black	Mountain	Carnivore	
+96	1	4	0	1	4.9	Grey	Domestic	Carnivore	Cat
+97	1	4	0	1	3.7	Orange	Domestic	Carnivore	
+98	1	4	0	1	4.1	White	Domestic	Carnivore	
+99	0	0	0	1	145	Grey	Ocean	Piscivore	Aquatic Mammal
+100	0	0	0	1	155	Blue	Ocean	Piscivore	
