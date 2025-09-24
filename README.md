@@ -135,6 +135,61 @@ def generate_pairs_with_labels(X_tensor, labels):
     return pair_list, torch.tensor(label_list, dtype=torch.float32)
 ```
 
+The `preprocess_features` function converts a raw DataFrame into a clean, numeric feature matrix suitable for the FluxNet neural network. It handles both **numeric** and **categorical** columns:
+
+1. **Numeric preprocessing**  
+   - Forces numeric columns to numeric types (`pd.to_numeric`) and coerces errors.  
+   - Fills missing values with the mean of each column.  
+   - Standardizes numeric features (zero mean, unit variance) using `StandardScaler`. If a scaler is provided, it reuses it; otherwise, it fits a new one.
+
+2. **Categorical preprocessing**  
+   - Converts categorical columns into one-hot encoded vectors using `OneHotEncoder`.  
+   - Handles unknown categories gracefully if using a previously fitted encoder.
+
+3. **Feature combination**  
+   - Concatenates numeric and categorical features into a single matrix `X` for input to the neural network.
+
+The function returns the feature matrix `X` along with the fitted `scaler` and `encoder` for consistent preprocessing of test data.
+
+```python
+def preprocess_features(df, numeric_cols, categorical_cols, scaler=None, encoder=None):
+    """
+    Preprocess numeric and categorical features for neural network input.
+
+    Args:
+        df (pandas.DataFrame): Raw input data containing both numeric and categorical columns.
+        numeric_cols (list of str): Names of numeric columns to standardize.
+        categorical_cols (list of str): Names of categorical columns to one-hot encode.
+        scaler (sklearn.preprocessing.StandardScaler, optional): Fitted scaler to reuse. If None, a new one is fitted.
+        encoder (sklearn.preprocessing.OneHotEncoder, optional): Fitted encoder to reuse. If None, a new one is fitted.
+
+    Returns:
+        tuple:
+            - X (np.ndarray): Preprocessed feature matrix (numeric + one-hot categorical features).
+            - scaler (StandardScaler): Fitted scaler used for numeric columns.
+            - encoder (OneHotEncoder): Fitted encoder used for categorical columns.
+    """
+    # --- Numeric preprocessing ---
+    for col in numeric_cols:
+        df[col] = pd.to_numeric(df[col], errors='coerce')   
+    df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())  
+    if not scaler:
+        scaler = StandardScaler()                          
+        num_features = scaler.fit_transform(df[numeric_cols])
+    else:
+        num_features = scaler.transform(df[numeric_cols])  
+
+    # --- Categorical preprocessing ---
+    if not encoder:
+        encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
+        context_features = encoder.fit_transform(df[categorical_cols])
+    else:
+        context_features = encoder.transform(df[categorical_cols])
+
+    # Combine numeric + categorical into final feature matrix
+    X = np.hstack([num_features, context_features])
+    return X, scaler, encoder
+```
 
 ## References 
 [1] Huh, M., Cheung, B., Wang, T. & Isola, P., 2024. *The Platonic Representation Hypothesis*. arXiv preprint arXiv:2405.07987.
