@@ -252,8 +252,19 @@ X, scaler, encoder = preprocess_features(df, numeric_cols, categorical_cols)
 X_tensor = torch.tensor(X, dtype=torch.float32)
 labels = df['Type_Label'].fillna('Unlabeled').values   # labels (use "Unlabeled" if missing)
 labeled_mask = labels != 'Unlabeled'                  # boolean mask: labeled vs unlabeled
-
 ```
+### 3. Define Flux Network
+
+After preprocessing the data, the next step is to define the neural network that will learn **latent concept representations** from the features. 
+
+```python
+# Input dimension = number of processed features
+input_dim = X.shape[1]
+latent_dim = 16   # dimension of latent flux space
+model = FluxNet(input_dim, latent_dim)
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+```
+
 
 ## References 
 [1] Huh, M., Cheung, B., Wang, T. & Isola, P., 2024. *The Platonic Representation Hypothesis*. arXiv preprint arXiv:2405.07987.
