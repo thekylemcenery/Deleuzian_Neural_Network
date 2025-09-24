@@ -21,6 +21,27 @@ A key limitation of this framework is that identity is still defined in relation
 
 This motivates Nietzsche and Deleuze’s focus on **pure difference**, where identity emerges from difference itself rather than through comparison or negation. Concepts are not defined by fixed qualities or opposition to other categories; they are dynamic patterns of relations and variations. A concept is always in motion, shaped by differences from other phenomena, allowing new identities to emerge organically. For example, a hybrid plant with characteristics of both a tree and a cactus exists as its own concept, without being forced into pre-existing categories, capturing novelty and fluidity naturally [3].
 
+## Data
+
+## Data  
+
+The project uses two tab-separated datasets:  
+
+- **`animals_100.tsv`**: the main training dataset, containing around 100 animals.  
+- **`animals_test.tsv`**: an unlabeled test set for evaluating emergent category assignments.  
+- *(Optional)* **`animals_test_labeled.tsv`**: a labeled version of the test set, if available, used to compute prediction accuracy.  
+
+Each animal is described through two kinds of features:  
+
+- **Numeric features**: `Fur`, `Legs`, `Wings`, `Tail`, `Weight` — measurable traits.  
+- **Categorical features**: `Color`, `Habitat`, `Diet` — contextual traits.  
+
+Labels (e.g. *Cat*, *Dog*, *Bird*, *Aquatic Mammal*) are provided for some animals but not all. This partial labeling is intentional: the network is not meant to learn fixed categories in the Aristotelian sense, but to generate **emergent clusters** in latent space.  
+
+In other words, the data provides the **raw differences**—quantitative and qualitative traits—while the model organizes these differences into dynamic concepts, without presupposing fixed essences.  
+
+
+
 ## References 
 [1] Huh, M., Cheung, B., Wang, T. & Isola, P., 2024. *The Platonic Representation Hypothesis*. arXiv preprint arXiv:2405.07987.
 
