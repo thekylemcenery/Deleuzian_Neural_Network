@@ -312,9 +312,93 @@ for t in type_names:
         centroids[t] = Z[idx].mean(dim=0)
 ```
 ## Evaluation
+### 7. Predicting Test Animals
+
+Once the network has learned latent concept representations, it can be used to classify new, unseen data. First, the test set is preprocessed using the **same scaler and encoder** fitted on the training data, ensuring consistency in numeric scaling and one-hot encoding of categorical features. The network then maps the test examples into the **latent flux space** without computing gradients:
+
+```python
+X_test, _, _ = preprocess_features(test_df, numeric_cols, categorical_cols, scaler=scaler, encoder=encoder)
+with torch.no_grad():
+    Z_test = model(torch.tensor(X_test, dtype=torch.float32))
+
+# Train a kNN classifier on latent embeddings of labeled data
+train_idx = np.where(labeled_mask)[0]
+train_embeddings = Z[train_idx].detach().numpy()
+train_labels = labels[train_idx]
+
+# Use PCA to reduce dimensionality before kNN (helps stability)
+pca_knn = PCA(n_components=min(8, latent_dim))
+train_embeddings_pca = pca_knn.fit_transform(train_embeddings)
+test_embeddings_pca = pca_knn.transform(Z_test.detach().numpy())
+
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(train_embeddings_pca, train_labels)
+predicted_labels = knn.predict(test_embeddings_pca)
+test_df["Predicted_Label"] = predicted_labels
+print("\nPredicted categories for test animals:")
+print(test_df[["Animal","Predicted_Label"]])
+```
+
+
+If a labeled test set is available, the model’s predictions can be quantitatively evaluated. The code first attempts to load the labeled test file. If found, it compares the predicted labels from the kNN classifier to the true labels:
+
+```python
+try:
+    labeled_test_df = pd.read_csv("animals_test_labeled.tsv", sep="\t")
+    true_labels = labeled_test_df["Type_Label"].values
+    pred_eval = test_df["Predicted_Label"].values[:len(true_labels)]
+    pct_false = np.mean(pred_eval != true_labels)*100
+    print(f"\nPercentage of false labels: {pct_false:.2f}%")
+except FileNotFoundError:
+    print("\nNo labeled test file found. Skipping evaluation.")
+```
 
 ## Visualisation
 
+
+The final step visualizes the learned **latent flux space** and how test examples relate to emergent concepts. First, the latent embeddings of the training data are projected into 2D using PCA for easier visualization:
+
+```python
+# PCA to 2D for plotting latent embeddings
+pca_2d = PCA(n_components=2, random_state=42)
+Z_2d = pca_2d.fit_transform(Z.detach().numpy())
+centroids_2d = {k: pca_2d.transform(v.unsqueeze(0).numpy())[0] for k,v in centroids.items()}
+```
+Next, a vector field is generated across a grid of points in the 2D space. Each arrow points toward the nearest concept centroid, illustrating how the latent space “flows” toward emergent categories:
+
+```python
+x_min, x_max = Z_2d[:,0].min()-1, Z_2d[:,0].max()+1
+y_min, y_max = Z_2d[:,1].min()-1, Z_2d[:,1].max()+1
+xx, yy = np.meshgrid(np.linspace(x_min,x_max,20), np.linspace(y_min,y_max,20))
+U = np.zeros_like(xx)
+V = np.zeros_like(yy)
+for i in range(xx.shape[0]):
+    for j in range(xx.shape[1]):
+        point = np.array([xx[i,j], yy[i,j]])
+        closest_c = min(centroids_2d, key=lambda k: np.linalg.norm(centroids_2d[k]-point))
+        vec = centroids_2d[closest_c] - point
+        U[i,j] = vec[0]
+        V[i,j] = vec[1]
+```
+Finally, the vector field is plotted along with the training points and centroids:
+
+```python
+plt.figure(figsize=(8,6))
+plt.quiver(xx, yy, U, V, color='teal', alpha=0.6)
+plt.scatter(Z_2d[:,0], Z_2d[:,1], c='red', label='Training animals')
+for name,pos in centroids_2d.items():
+    plt.scatter(pos[0], pos[1], label=name, s=100)
+plt.title("Latent Concept Vector Field (Deleuzian Flux)")
+plt.xlabel("PC 1")
+plt.ylabel("PC 2")
+plt.legend()
+plt.show()
+```
+
+This resulting visualization shows how the latent embeddings organize into concept “attractors,” with arrows indicating the flow toward centroids. Outliers in the test data, such as a hairless cat or an unusually heavy bird—appear away from the main clusters, highlighting how extreme or novel examples are naturally represented without forcing them into existing categories. 
+
+<img width="506" height="387" alt="Figure 1" src="https://github.com/user-attachments/assets/80e905d8-cbf5-4c40-a390-00c5ad050815" />
+ 
 ## Outlook
 
 ## References 
