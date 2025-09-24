@@ -4,19 +4,20 @@
 Modern machine learning systems often rely on Platonic or Aristotelian ontologies, treating concepts as fixed forms or sets of attributes. While effective for traditional classification, such frameworks struggle with nuance, ambiguity, and emergent structures, often encoding human biases and failing to capture the complexity of reality. In contrast, postmodern philosophies, particularly those of Nietzsche and Deleuze, emphasize concepts as dynamic, relational, and defined by their differential interactions rather than fixed identities. This project implements a computational analogue of this ontology, modelling concepts as latent vector fields shaped by differences, enabling more flexible, nuanced, and emergent representations of categories and taxonomy.
 
 
-## Contents  
+## Contents
 
-1. [Introduction](#introduction)  
-2. [Background](#background)  
-3. [Installation](#installation)  
-4. [Data](#data)  
-5. [Model Architecture](#model-architecture)  
-6. [Training The FluxNet](#training-fluxnet)  
-7. [Emergent Concepts](#emergent-concepts)  
-8. [Evaluation](#evaluation)  
-9. [Visualisation](#visualization)  
-10. [Outlook](#outlook)  
-11. [References](#references)  
+1. [Introduction](#introduction)
+2. [Background](#background)
+3. [Installation](#installation)
+4. [Data](#data)
+5. [Model Architecture](#model-architecture)
+6. [Training the FluxNet](#training-the-fluxnet)
+7. [Emergent Concepts](#emergent-concepts)
+8. [Evaluation](#evaluation)
+9. [Visualisation](#visualisation)
+10. [Outlook](#outlook)
+11. [Acknowledgements](#acknowledgements)
+12. [References](#references)
 
 ## Background
 
