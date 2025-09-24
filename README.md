@@ -242,8 +242,6 @@ numeric_cols = ['Fur', 'Legs', 'Wings', 'Tail', 'Weight']   # numeric features
 categorical_cols = ['Color', 'Habitat', 'Diet']             # categorical features
 ```
 
-### 2. Preprocess Features
-
 Once the raw data is loaded, the features must be prepared for input into the neural network. This section performs **numeric standardization**, **categorical one-hot encoding**, and converts the data into a PyTorch tensor.
 
 ```python
@@ -253,9 +251,7 @@ X_tensor = torch.tensor(X, dtype=torch.float32)
 labels = df['Type_Label'].fillna('Unlabeled').values   # labels (use "Unlabeled" if missing)
 labeled_mask = labels != 'Unlabeled'                  # boolean mask: labeled vs unlabeled
 ```
-### 3. Define Flux Network
-
-After preprocessing the data, the next step is to define the neural network that will learn **latent concept representations** from the features. 
+After preprocessing, we need to set up the neural network that will learn **latent concept representations** from the input features.
 
 ```python
 # Input dimension = number of processed features
@@ -265,6 +261,12 @@ model = FluxNet(input_dim, latent_dim)
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 ```
 
+Contrastive learning requires pairs of examples with a label indicating whether they belong to the same category (positive pair) or different categories (negative pair).
+
+```python
+# Create training pairs (same-label = positive, diff-label = negative)
+pairs, pair_labels = generate_pairs_with_labels(X_tensor, labels)
+```
 
 ## References 
 [1] Huh, M., Cheung, B., Wang, T. & Isola, P., 2024. *The Platonic Representation Hypothesis*. arXiv preprint arXiv:2405.07987.
